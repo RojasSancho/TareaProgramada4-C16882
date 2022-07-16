@@ -14,6 +14,7 @@ SOURCES += \
     tienda.cpp
 
 HEADERS += \
+    excepcionCaracterNoEsNumero.h \
     excepcionNumeroNegativo.h \
     producto.h \
     tienda.h

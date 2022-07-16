@@ -15,9 +15,9 @@ formAnadirProducto::~formAnadirProducto()
     delete ui;
 }
 
-int formAnadirProducto::idNumero()
+QString formAnadirProducto::idNumero()
 {
-    return this->ui->editID->text().toInt();
+    return this->ui->editID->text();
 }
 
 QString formAnadirProducto::nombreText()
@@ -25,7 +25,7 @@ QString formAnadirProducto::nombreText()
     return this->ui->editNombre->text();
 }
 
-int formAnadirProducto::existenciasNumero()
+QString formAnadirProducto::existenciasNumero()
 {
-    return this->ui->editExistencias->text().toInt();
+    return this->ui->editExistencias->text();
 }

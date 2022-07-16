@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+
+
 #include "ui_mainwindow.h"
 
 
@@ -57,13 +59,38 @@ void MainWindow::on_btnNuevoProducto_clicked()
 
     if(result == QDialog::Accepted)
     {
-        int id = formProducto.idNumero();
-        string nombre = formProducto.nombreText().toStdString();
-        int existencias = formProducto.existenciasNumero();
+        bool ok;
+        bool ok2;
+        formProducto.idNumero().toInt(&ok);
+        formProducto.existenciasNumero().toInt(&ok2);
+        if(!ok || !ok2)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText("Los campos de ID y existencias no permiten caracteres diferentes a numeros.");
+            msgbox->open();
+            return;
+        }
 
-        Producto *producto = new Producto(id, nombre, existencias);
-        QString nombreEnQstring = QString::fromStdString(producto->ConsultarNombre());
-        this->ui->listProductosDeTienda->addItem(nombreEnQstring);
+        try
+        {
+            int id = formProducto.idNumero().toInt();
+            string nombre = formProducto.nombreText().toStdString();
+            int existencias = formProducto.existenciasNumero().toInt();
+
+            Producto *producto = new Producto(id, nombre, existencias);
+            QString nombreEnQstring = QString::fromStdString(producto->ConsultarNombre());
+            QString idEnQString = QString::number(producto->ConsultarID());
+            QString productoEnLista = "[" + idEnQString + "]"  + " - " + nombreEnQstring;
+            this->ui->listProductosDeTienda->addItem(productoEnLista);
+        }
+        catch (const ExcepcionNumeroNegativo& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText("Los campos de ID y existencias solo permiten numeros positivos.");
+            msgbox->open();
+        }
     }
 }
 

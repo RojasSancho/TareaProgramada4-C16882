@@ -3,15 +3,18 @@
 #include <fstream>
 
 #include <exception>
+#include "excepcionCaracterNoEsNumero.h"
 #include "excepcionNumeroNegativo.h"
 
 using namespace std;
 
 Producto::Producto(int id, string nombre, int existenciasDeProducto)
 {
-    if(id <= 0 || existenciasDeProducto < 0){
+    if(id < 0 || existenciasDeProducto < 0)
+    {
         throw ExcepcionNumeroNegativo();
     }
+
     this->id = id;
     strcpy(this->nombre, nombre.c_str());
     this->existenciasDeProducto = existenciasDeProducto;

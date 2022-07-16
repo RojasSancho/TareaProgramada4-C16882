@@ -9,7 +9,7 @@ class ExcepcionNumeroNegativo : public std::exception
     ExcepcionNumeroNegativo() noexcept = default;
     ~ExcepcionNumeroNegativo() = default;
 
-    virtual const char* what() const noexcept 
+    virtual const char* what() const noexcept
     {
         return "No esta permitido usar numeros negativos.";
     }

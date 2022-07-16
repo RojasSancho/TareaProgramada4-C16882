@@ -17,8 +17,8 @@ public:
     explicit formAnadirProducto(QWidget *parent = nullptr);
     ~formAnadirProducto();
     QString nombreText();
-    int idNumero();
-    int existenciasNumero();
+    QString idNumero();
+    QString existenciasNumero();
 
 private slots:
 

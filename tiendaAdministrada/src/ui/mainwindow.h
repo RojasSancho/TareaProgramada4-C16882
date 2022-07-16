@@ -3,7 +3,10 @@
 #include "tienda.h"
 #include "formanadirproducto.h"
 #include "producto.h"
+#include "excepcionNumeroNegativo.h"
+#include "excepcionCaracterNoEsNumero.h"
 #include <QMainWindow>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
