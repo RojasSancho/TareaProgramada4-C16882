@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>401</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="layoutInfoTienda">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="editNombreTienda"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNombreTienda">
+       <property name="text">
+        <string>Nombre:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelDireccionInternetTienda">
+       <property name="text">
+        <string>Dirección Internet:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelDireccionFisicaTienda">
+       <property name="text">
+        <string>Dirección Física:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="editDireccionFisicaTienda"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelTelefonoTienda">
+       <property name="text">
+        <string>Teléfono:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="editTelefonoTienda"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="editDireccionInternetTienda"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="labelTitulo">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>20</y>
+      <width>63</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TIENDA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNuevoProducto">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>500</y>
+      <width>171</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Añadir nuevo producto</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listProductosDeTienda">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>230</y>
+      <width>751</width>
+      <height>251</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
