@@ -48,22 +48,26 @@ void Tienda::InsertarProducto(Producto *productoNuevo)
     this->productos.push_back(productoNuevo);
 }
 
-void Tienda::EliminarProducto(int idProductoAEliminar)
+void Tienda::EliminarProducto(int posicionProductoAEliminar)
 {
-    if(idProductoAEliminar < 0)
+    if(posicionProductoAEliminar < 0)
     {
         throw ExcepcionNumeroNegativo();
     }
 
     this->iterador = productos.begin();
+    int contador = 0;
     for(Producto *producto : this->productos)
     {
-        if((producto->ConsultarID()) == idProductoAEliminar) 
+        if(contador == posicionProductoAEliminar)
         {
             productos.erase(this->iterador);
+            delete producto;
         }
         iterador++;
-    }   
+        contador++;
+    }
+
 }
 
 string Tienda::ConsultarTodosLosProductos()
@@ -88,6 +92,19 @@ Producto Tienda::BuscarProductoPorNombre(string nombre)
         {
             return *producto;
         }
+    }
+}
+
+Producto Tienda::BuscarProductoPorPosicion(int posicionProducto)
+{
+    int contador = 0;
+    for(Producto *producto : this->productos)
+    {
+        if (contador == posicionProducto)
+        {
+            return *producto;
+        }
+        contador++;
     }
 }
 

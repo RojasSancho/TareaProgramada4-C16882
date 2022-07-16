@@ -22,9 +22,10 @@ class Tienda {
     Tienda();
    
     void InsertarProducto(Producto *productoNuevo);
-    void EliminarProducto(int idProductoAEliminar);
+    void EliminarProducto(int posicionProductoAEliminar);
     string ConsultarTodosLosProductos();
     Producto BuscarProductoPorNombre(string nombre);
+    Producto BuscarProductoPorPosicion(int posicionProducto);
     void CambiarNombre(string nuevoNombre);
     void CambiarDireccionInternet(string nuevaDireccionInternet);
     void CambiarDireccionFisica(string nuevaDireccionFisica);

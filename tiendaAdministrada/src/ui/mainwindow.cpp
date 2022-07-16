@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete this->tienda;
 }
 
 void MainWindow::on_editNombreTienda_editingFinished()
@@ -73,7 +74,7 @@ void MainWindow::on_btnNuevoProducto_clicked()
         try
         {
             int id = formProducto.idNumero().toInt();
-            string nombre = formProducto.nombreText().toStdString();
+            string nombre = formProducto.nombreTexto().toStdString();
             int existencias = formProducto.existenciasNumero().toInt();
 
             Producto *producto = new Producto(id, nombre, existencias);
@@ -100,10 +101,15 @@ void MainWindow::on_btnNuevoProducto_clicked()
     }
 }
 
-
 void MainWindow::on_btnEliminarProducto_clicked()
 {
+    int numeroDeFilaProducto = this->ui->listProductosDeTienda->currentRow();
+    this->tienda->EliminarProducto(numeroDeFilaProducto);
+
     QListWidgetItem *item = this->ui->listProductosDeTienda->currentItem();
     delete item;
+    this->ui->listProductosDeTienda->clearSelection(); //Para que cuando se elimine un producto no se seleccione otro de la lista automaticamente
+
 }
+
 

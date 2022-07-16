@@ -17,7 +17,7 @@
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>30</x>
       <y>70</y>
       <width>401</width>
       <height>141</height>
@@ -113,6 +113,19 @@
     </property>
     <property name="text">
      <string>Eliminar producto</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>490</y>
+      <width>171</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modificar producto</string>
     </property>
    </widget>
   </widget>

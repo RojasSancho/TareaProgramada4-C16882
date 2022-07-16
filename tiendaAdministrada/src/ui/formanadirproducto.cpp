@@ -20,7 +20,7 @@ QString formAnadirProducto::idNumero()
     return this->ui->editID->text();
 }
 
-QString formAnadirProducto::nombreText()
+QString formAnadirProducto::nombreTexto()
 {
     return this->ui->editNombre->text();
 }

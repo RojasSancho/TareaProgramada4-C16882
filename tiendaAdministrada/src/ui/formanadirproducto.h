@@ -16,7 +16,7 @@ class formAnadirProducto : public QDialog
 public:
     explicit formAnadirProducto(QWidget *parent = nullptr);
     ~formAnadirProducto();
-    QString nombreText();
+    QString nombreTexto();
     QString idNumero();
     QString existenciasNumero();
 
