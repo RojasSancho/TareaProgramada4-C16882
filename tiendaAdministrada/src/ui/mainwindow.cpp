@@ -1,6 +1,4 @@
 #include "mainwindow.h"
-
-
 #include "ui_mainwindow.h"
 
 
@@ -82,6 +80,7 @@ void MainWindow::on_btnNuevoProducto_clicked()
             QString nombreEnQstring = QString::fromStdString(producto->ConsultarNombre());
             QString idEnQString = QString::number(producto->ConsultarID());
             QString productoEnLista = "[" + idEnQString + "]"  + " - " + nombreEnQstring;
+            tienda->InsertarProducto(producto);
             this->ui->listProductosDeTienda->addItem(productoEnLista);
         }
         catch (const ExcepcionNumeroNegativo& e)
@@ -91,6 +90,20 @@ void MainWindow::on_btnNuevoProducto_clicked()
             msgbox->setText("Los campos de ID y existencias solo permiten numeros positivos.");
             msgbox->open();
         }
+        catch (const ExcepcionDatosVacios& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText("El campo de nombre no puede dejarse vacio.");
+            msgbox->open();
+        }
     }
+}
+
+
+void MainWindow::on_btnEliminarProducto_clicked()
+{
+    QListWidgetItem *item = this->ui->listProductosDeTienda->currentItem();
+    delete item;
 }
 

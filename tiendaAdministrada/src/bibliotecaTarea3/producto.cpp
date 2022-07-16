@@ -4,6 +4,7 @@
 
 #include <exception>
 #include "excepcionCaracterNoEsNumero.h"
+#include "excepcionDatosVacios.h"
 #include "excepcionNumeroNegativo.h"
 
 using namespace std;
@@ -13,6 +14,11 @@ Producto::Producto(int id, string nombre, int existenciasDeProducto)
     if(id < 0 || existenciasDeProducto < 0)
     {
         throw ExcepcionNumeroNegativo();
+    }
+
+    if(nombre.empty())
+    {
+        throw ExcepcionDatosVacios();
     }
 
     this->id = id;

@@ -5,6 +5,7 @@
 #include "producto.h"
 #include "excepcionNumeroNegativo.h"
 #include "excepcionCaracterNoEsNumero.h"
+#include "excepcionDatosVacios.h"
 #include <QMainWindow>
 #include <QMessageBox>
 
@@ -32,6 +33,8 @@ private slots:
     void on_editDireccionFisicaTienda_editingFinished();
 
     void on_btnNuevoProducto_clicked();
+
+    void on_btnEliminarProducto_clicked();
 
 private:
     Ui::MainWindow *ui;

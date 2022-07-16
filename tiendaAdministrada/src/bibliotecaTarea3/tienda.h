@@ -21,7 +21,6 @@ class Tienda {
     Tienda(string nombre, string direccionInternet, string direccionFisica, string telefono);
     Tienda();
    
-
     void InsertarProducto(Producto *productoNuevo);
     void EliminarProducto(int idProductoAEliminar);
     string ConsultarTodosLosProductos();

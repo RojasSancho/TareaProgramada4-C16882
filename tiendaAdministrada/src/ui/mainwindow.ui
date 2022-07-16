@@ -79,11 +79,21 @@
      <string>TIENDA</string>
     </property>
    </widget>
+   <widget class="QListWidget" name="listProductosDeTienda">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>240</y>
+      <width>751</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
    <widget class="QPushButton" name="btnNuevoProducto">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>500</y>
+      <x>420</x>
+      <y>490</y>
       <width>171</width>
       <height>29</height>
      </rect>
@@ -92,14 +102,17 @@
      <string>Añadir nuevo producto</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listProductosDeTienda">
+   <widget class="QPushButton" name="btnEliminarProducto">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>230</y>
-      <width>751</width>
-      <height>251</height>
+      <x>610</x>
+      <y>490</y>
+      <width>171</width>
+      <height>29</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Eliminar producto</string>
     </property>
    </widget>
   </widget>

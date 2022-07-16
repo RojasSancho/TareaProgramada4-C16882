@@ -15,6 +15,7 @@ SOURCES += \
 
 HEADERS += \
     excepcionCaracterNoEsNumero.h \
+    excepcionDatosVacios.h \
     excepcionNumeroNegativo.h \
     producto.h \
     tienda.h
