@@ -83,18 +83,18 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>240</y>
+      <y>260</y>
       <width>751</width>
-      <height>221</height>
+      <height>201</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="btnNuevoProducto">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>490</y>
-      <width>171</width>
+      <x>550</x>
+      <y>480</y>
+      <width>231</width>
       <height>29</height>
      </rect>
     </property>
@@ -105,27 +105,53 @@
    <widget class="QPushButton" name="btnEliminarProducto">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>490</y>
-      <width>171</width>
+      <x>550</x>
+      <y>520</y>
+      <width>231</width>
       <height>29</height>
      </rect>
     </property>
     <property name="text">
-     <string>Eliminar producto</string>
+     <string>Eliminar producto seleccionado</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnModificarNombreProducto">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>490</y>
-      <width>171</width>
+      <y>480</y>
+      <width>281</width>
       <height>29</height>
      </rect>
     </property>
     <property name="text">
-     <string>Modificar producto</string>
+     <string>Modificar nombre de producto</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>230</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>LISTA DE PRODUCTOS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnExistenciasProducto">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>520</y>
+      <width>281</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modificar no. de existencias de producto</string>
     </property>
    </widget>
   </widget>

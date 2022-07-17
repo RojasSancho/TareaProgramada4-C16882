@@ -65,7 +65,7 @@ void MainWindow::on_btnNuevoProducto_clicked()
         if(!ok || !ok2)
         {
             QMessageBox* msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Error");
+            msgbox->setWindowTitle("Atencion");
             msgbox->setText("Los campos de ID y existencias no permiten caracteres diferentes a numeros.");
             msgbox->open();
             return;
@@ -87,14 +87,14 @@ void MainWindow::on_btnNuevoProducto_clicked()
         catch (const ExcepcionNumeroNegativo& e)
         {
             QMessageBox* msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Error");
+            msgbox->setWindowTitle("Atencion");
             msgbox->setText("Los campos de ID y existencias solo permiten numeros positivos.");
             msgbox->open();
         }
         catch (const ExcepcionDatosVacios& e)
         {
             QMessageBox* msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Error");
+            msgbox->setWindowTitle("Atencion");
             msgbox->setText("El campo de nombre no puede dejarse vacio.");
             msgbox->open();
         }
@@ -103,13 +103,107 @@ void MainWindow::on_btnNuevoProducto_clicked()
 
 void MainWindow::on_btnEliminarProducto_clicked()
 {
-    int numeroDeFilaProducto = this->ui->listProductosDeTienda->currentRow();
-    this->tienda->EliminarProducto(numeroDeFilaProducto);
+    try{
+        int numeroDeFilaProducto = this->ui->listProductosDeTienda->currentRow();
+        this->tienda->EliminarProducto(numeroDeFilaProducto);
 
-    QListWidgetItem *item = this->ui->listProductosDeTienda->currentItem();
-    delete item;
-    this->ui->listProductosDeTienda->clearSelection(); //Para que cuando se elimine un producto no se seleccione otro de la lista automaticamente
-
+        QListWidgetItem *item = this->ui->listProductosDeTienda->currentItem();
+        delete item;
+        this->ui->listProductosDeTienda->clearSelection(); //Para que cuando se elimine un producto no se seleccione otro de la lista automaticamente
+    }
+    catch(const ExcepcionNumeroNegativo& e)
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("Debe seleccionar un producto de la lista para eliminar.");
+        msgbox->open();
+        return;
+    }
 }
 
+void MainWindow::on_btnModificarNombreProducto_clicked()
+{
+    if(this->ui->listProductosDeTienda->currentItem() == NULL)
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("Debe seleccionar un producto de la lista para modificar.");
+        msgbox->open();
+        return;
+    }
+
+    formModificarNombre formNuevoNombre = formModificarNombre(this);
+    int resultNuevoNombre = formNuevoNombre.exec();
+
+    if(resultNuevoNombre == QDialog::Accepted)
+    {
+        try
+        {
+            int numeroDeFilaProducto = this->ui->listProductosDeTienda->currentRow();
+            Producto *producto = this->tienda->BuscarProductoPorPosicion(numeroDeFilaProducto);
+            string nuevoNombre = formNuevoNombre.darNuevoNombre().toStdString();
+            producto->CambiarNombre(nuevoNombre);
+
+            QString idProducto = QString::number(producto->ConsultarID());
+            QString nuevoNombreQString = QString::fromStdString(nuevoNombre);
+
+            QString productoEnLista = "[" + idProducto + "]"  + " - " + nuevoNombreQString;
+            this->ui->listProductosDeTienda->currentItem()->setText(productoEnLista);
+        }
+        catch(const ExcepcionDatosVacios& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("El campo para el nuevo nombre no puede dejarse vacio.");
+            msgbox->open();
+        }
+    }
+}
+
+void MainWindow::on_btnExistenciasProducto_clicked()
+{
+    if(this->ui->listProductosDeTienda->currentItem() == NULL)
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("Debe seleccionar un producto de la lista para modificar.");
+        msgbox->open();
+        return;
+    }
+
+    formmodificarexistencias formModificarExistencias = formmodificarexistencias(this);
+    int numeroDeFilaProducto = this->ui->listProductosDeTienda->currentRow();
+    Producto *producto = this->tienda->BuscarProductoPorPosicion(numeroDeFilaProducto);
+    QString existenciasActuales = QString::number(producto->ConsultarNumeroDeExistencias());
+    formModificarExistencias.cambiarLabelExistenciasActuales(existenciasActuales);
+
+    int resultNuevasExistencias = formModificarExistencias.exec();
+
+    if(resultNuevasExistencias == QDialog::Accepted)
+    {
+        bool ok;
+        formModificarExistencias.darNuevasExistencias().toInt(&ok);
+        if(!ok)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("El campo para las nuevas existencias no permite caracteres diferentes a números.");
+            msgbox->open();
+            return;
+        }
+
+        try
+        {
+            int nuevasExistencias = formModificarExistencias.darNuevasExistencias().toInt();
+            producto->CambiarNumeroDeExistencias(nuevasExistencias);
+        }
+        catch(const ExcepcionNumeroNegativo& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("El campo para las nuevas existencias solo permite números positivos.");
+            msgbox->open();
+        }
+    }
+}
 

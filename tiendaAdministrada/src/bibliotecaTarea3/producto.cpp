@@ -35,6 +35,10 @@ Producto::Producto()
 
 void Producto::CambiarNombre(string nuevoNombre)
 {
+    if(nuevoNombre.empty())
+    {
+        throw ExcepcionDatosVacios();
+    }
     strcpy(this->nombre, nuevoNombre.c_str());
 }
 

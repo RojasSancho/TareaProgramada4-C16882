@@ -10,15 +10,21 @@ CONFIG += c++17
 
 SOURCES += \
     formanadirproducto.cpp \
+    formmodificarexistencias.cpp \
+    formmodificarnombre.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     formanadirproducto.h \
+    formmodificarexistencias.h \
+    formmodificarnombre.h \
     mainwindow.h
 
 FORMS += \
     formanadirproducto.ui \
+    formmodificarexistencias.ui \
+    formmodificarnombre.ui \
     mainwindow.ui
 
 # Default rules for deployment.

@@ -95,14 +95,14 @@ Producto Tienda::BuscarProductoPorNombre(string nombre)
     }
 }
 
-Producto Tienda::BuscarProductoPorPosicion(int posicionProducto)
+Producto* Tienda::BuscarProductoPorPosicion(int posicionProducto)
 {
     int contador = 0;
     for(Producto *producto : this->productos)
     {
         if (contador == posicionProducto)
         {
-            return *producto;
+            return producto;
         }
         contador++;
     }

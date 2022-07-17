@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 #include "tienda.h"
 #include "formanadirproducto.h"
+#include "formmodificarnombre.h"
+#include "formmodificarexistencias.h"
 #include "producto.h"
 #include "excepcionNumeroNegativo.h"
 #include "excepcionCaracterNoEsNumero.h"
@@ -35,6 +37,10 @@ private slots:
     void on_btnNuevoProducto_clicked();
 
     void on_btnEliminarProducto_clicked();
+
+    void on_btnModificarNombreProducto_clicked();
+
+    void on_btnExistenciasProducto_clicked();
 
 private:
     Ui::MainWindow *ui;
