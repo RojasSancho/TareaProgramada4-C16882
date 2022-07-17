@@ -3,9 +3,6 @@
 #include <fstream>
 
 #include <exception>
-#include "excepcionCaracterNoEsNumero.h"
-#include "excepcionDatosVacios.h"
-#include "excepcionNumeroNegativo.h"
 
 using namespace std;
 
@@ -19,6 +16,11 @@ Producto::Producto(int id, string nombre, int existenciasDeProducto)
     if(nombre.empty())
     {
         throw ExcepcionDatosVacios();
+    }
+
+    if(nombre.length() > 20)
+    {
+        throw ExcepcionDatoMuyGrande();
     }
 
     this->id = id;
@@ -38,6 +40,10 @@ void Producto::CambiarNombre(string nuevoNombre)
     if(nuevoNombre.empty())
     {
         throw ExcepcionDatosVacios();
+    }
+    if(nuevoNombre.length() > 20)
+    {
+        throw ExcepcionDatoMuyGrande();
     }
     strcpy(this->nombre, nuevoNombre.c_str());
 }

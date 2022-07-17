@@ -4,6 +4,10 @@
 #include <vector>
 #include <iostream>
 #include "producto.h"
+#include "excepcionCaracterNoEsNumero.h"
+#include "excepcionNumeroNegativo.h"
+#include "excepcionDatosVacios.h"
+#include "excepcionDatoMuyGrande.h"
 
 using namespace std;
 

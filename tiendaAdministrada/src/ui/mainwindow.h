@@ -10,6 +10,8 @@
 #include "excepcionDatosVacios.h"
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <fstream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +43,8 @@ private slots:
     void on_btnModificarNombreProducto_clicked();
 
     void on_btnExistenciasProducto_clicked();
+
+    void on_btnGuardarEnArchivo_clicked();
 
 private:
     Ui::MainWindow *ui;

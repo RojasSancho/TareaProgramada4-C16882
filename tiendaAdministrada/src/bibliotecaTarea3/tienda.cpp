@@ -1,14 +1,19 @@
 #include "tienda.h"
+#include <algorithm>
 #include <iostream>
 #include <fstream>
-
 #include <exception>
-#include "excepcionNumeroNegativo.h"
+
 
 using namespace std;
 
 Tienda::Tienda(string nombre, string direccionInternet, string direccionFisica, string telefono)
 {
+    if(!(!telefono.empty() && std::all_of(telefono.begin(), telefono.end(), ::isdigit)))
+    {
+        throw ExcepcionCaracterNoEsNumero();
+    }
+
     strcpy(this->nombre, nombre.c_str());
     strcpy(this->direccionInternet, direccionInternet.c_str());
     strcpy(this->direccionFisica, direccionFisica.c_str());
@@ -25,21 +30,54 @@ Tienda::Tienda()
 
 void Tienda::CambiarNombre(string nuevoNombre) 
 {
+    if(nuevoNombre.empty())
+    {
+        throw ExcepcionDatosVacios();
+    }
+
+    if(nuevoNombre.length() > 15)
+    {
+        throw ExcepcionDatoMuyGrande();
+    }
+
     strcpy(this->nombre, nuevoNombre.c_str());
 }
 
 void Tienda::CambiarDireccionInternet(string nuevaDireccionInternet) 
 {
+    if(nuevaDireccionInternet.empty())
+    {
+        throw ExcepcionDatosVacios();
+    }
+
+    if(nuevaDireccionInternet.length() > 24)
+    {
+        throw ExcepcionDatoMuyGrande();
+    }
     strcpy(this->direccionInternet, nuevaDireccionInternet.c_str());
 }
 
 void Tienda::CambiarDireccionFisica(string nuevaDireccionFisica) 
 {
+    if(nuevaDireccionFisica.empty())
+    {
+        throw ExcepcionDatosVacios();
+    }
+
+    if(nuevaDireccionFisica.length() > 24)
+    {
+        throw ExcepcionDatoMuyGrande();
+    }
     strcpy(this->direccionFisica, nuevaDireccionFisica.c_str());
 }
 
 void Tienda::CambiarTelefono(string nuevoTelefono) 
 {
+    if(nuevoTelefono.length() > 8)
+    {
+        throw ExcepcionDatoMuyGrande();
+    }
+
     strcpy(this->telefono, nuevoTelefono.c_str());
 }
 

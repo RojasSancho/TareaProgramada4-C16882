@@ -18,16 +18,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_editNombreTienda_editingFinished()
 {
-    QString qstringNombre = this->ui->editNombreTienda->text();
-    string nombreTienda = qstringNombre.toStdString();
-    this->tienda->CambiarNombre(nombreTienda);
+
 }
 
 void MainWindow::on_editDireccionInternetTienda_editingFinished()
 {
-    QString qstringDireccionInternet = this->ui->editDireccionInternetTienda->text();
-    string direccionInternetTienda = qstringDireccionInternet.toStdString();
-    this->tienda->CambiarDireccionInternet(direccionInternetTienda);
+
 }
 
 void MainWindow::on_editDireccionFisicaTienda_cursorPositionChanged(int arg1, int arg2)
@@ -37,17 +33,13 @@ void MainWindow::on_editDireccionFisicaTienda_cursorPositionChanged(int arg1, in
 
 void MainWindow::on_editTelefonoTienda_editingFinished()
 {
-    QString qstringTelefono = this->ui->editTelefonoTienda->text();
-    string telefonoTienda = qstringTelefono.toStdString();
-    this->tienda->CambiarTelefono(telefonoTienda);
+
 }
 
 
 void MainWindow::on_editDireccionFisicaTienda_editingFinished()
 {
-    QString qstringDireccionFisica = this->ui->editDireccionFisicaTienda->text();
-    string direccionFisicaTienda = qstringDireccionFisica.toStdString();
-    this->tienda->CambiarDireccionFisica(direccionFisicaTienda);
+
 }
 
 
@@ -96,6 +88,13 @@ void MainWindow::on_btnNuevoProducto_clicked()
             QMessageBox* msgbox = new QMessageBox(this);
             msgbox->setWindowTitle("Atencion");
             msgbox->setText("El campo de nombre no puede dejarse vacio.");
+            msgbox->open();
+        }
+        catch(const ExcepcionDatoMuyGrande& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("El nombre del producto no puede exceder los 20 caracteres.");
             msgbox->open();
         }
     }
@@ -157,6 +156,13 @@ void MainWindow::on_btnModificarNombreProducto_clicked()
             msgbox->setText("El campo para el nuevo nombre no puede dejarse vacio.");
             msgbox->open();
         }
+        catch(const ExcepcionDatoMuyGrande& e)
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("El nombre del producto no puede exceder los 20 caracteres.");
+            msgbox->open();
+        }
     }
 }
 
@@ -204,6 +210,71 @@ void MainWindow::on_btnExistenciasProducto_clicked()
             msgbox->setText("El campo para las nuevas existencias solo permite números positivos.");
             msgbox->open();
         }
+    }
+}
+
+
+void MainWindow::on_btnGuardarEnArchivo_clicked()
+{
+    string telefonoTienda = this->ui->editTelefonoTienda->text().toStdString();
+    if(!(!telefonoTienda.empty() && std::all_of(telefonoTienda.begin(), telefonoTienda.end(), ::isdigit)))
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("El campo de telefono no admite caracteres diferentes a numeros y no puede estar vacio.");
+        msgbox->open();
+        return;
+    }
+    try{
+        QString qstringNombre = this->ui->editNombreTienda->text();
+        string nombreTienda = qstringNombre.toStdString();
+        this->tienda->CambiarNombre(nombreTienda);
+
+        QString qstringDireccionInternet = this->ui->editDireccionInternetTienda->text();
+        string direccionInternetTienda = qstringDireccionInternet.toStdString();
+        this->tienda->CambiarDireccionInternet(direccionInternetTienda);
+
+        QString qstringDireccionFisica = this->ui->editDireccionFisicaTienda->text();
+        string direccionFisicaTienda = qstringDireccionFisica.toStdString();
+        this->tienda->CambiarDireccionFisica(direccionFisicaTienda);
+
+        QString qstringTelefono = this->ui->editTelefonoTienda->text();
+        string telefonoTienda = qstringTelefono.toStdString();
+        this->tienda->CambiarTelefono(telefonoTienda);
+
+        QString fileName = QFileDialog::getSaveFileName(this,
+            "Guardar en archivo de datos", "",
+            tr("Archivo de datos (*.dat)"));
+
+        if(fileName != "")
+        {
+            std::string name = fileName.toStdString();
+            ofstream archivoSalida;
+            archivoSalida.open(name, ios::out|ios::binary);
+            if (!archivoSalida.is_open())
+            {
+                QMessageBox* msgbox = new QMessageBox(this);
+                msgbox->setWindowTitle("Atencion");
+                msgbox->setText("No fue posible abrir archivo .dat para escribir los datos");
+                msgbox->open();
+                return;
+            }
+            this->tienda->GuardarEnStreamBinario(&archivoSalida);
+        }
+    }
+    catch(const ExcepcionDatoMuyGrande& e)
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("POR FAVOR VERIFIQUE LOS DATOS Y VUELVA A INTENTARLO:\n\nEl campo de Nombre no puede exceder los 15 caracteres.\nEl campo de Direccion de Internet no puede exceder los 24 caracteres.\nEl campo de Direccion Fisica no puede exceder los 24 caracteres.");
+        msgbox->open();
+    }
+    catch(const ExcepcionDatosVacios& e)
+    {
+        QMessageBox* msgbox = new QMessageBox(this);
+        msgbox->setWindowTitle("Atencion");
+        msgbox->setText("Los campos de informacion general de la Tienda no pueden quedar en blanco al guardar.");
+        msgbox->open();
     }
 }
 

@@ -1,6 +1,10 @@
 #ifndef PRODUCTO_H
 #define PRODUCTO_H
 
+#include "excepcionCaracterNoEsNumero.h"
+#include "excepcionDatoMuyGrande.h"
+#include "excepcionDatosVacios.h"
+#include "excepcionNumeroNegativo.h"
 #include <iostream>
 #include <cstring>
 using namespace std;
