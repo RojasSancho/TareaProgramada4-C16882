@@ -8,6 +8,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Tienda");
+
+    QMessageBox* msgbox = new QMessageBox(this);
+    msgbox->setWindowTitle("Atencion");
+    msgbox->setText("Luego de que agregue algún producto a la tienda no podrá no podrá cargar desde archivo.");
+    msgbox->open();
 }
 
 MainWindow::~MainWindow()
@@ -75,6 +80,7 @@ void MainWindow::on_btnNuevoProducto_clicked()
             QString productoEnLista = "[" + idEnQString + "]"  + " - " + nombreEnQstring;
             tienda->InsertarProducto(producto);
             this->ui->listProductosDeTienda->addItem(productoEnLista);
+            this->ui->btnCargarDesdeArchivo->setEnabled(false);
         }
         catch (const ExcepcionNumeroNegativo& e)
         {
@@ -277,4 +283,48 @@ void MainWindow::on_btnGuardarEnArchivo_clicked()
         msgbox->open();
     }
 }
+
+
+void MainWindow::on_btnCargarDesdeArchivo_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        "Cargar desde archivo de datos", "",
+        tr("Archivo de datos (*.dat)"));
+
+    if(fileName != "")
+    {
+        std::string name = fileName.toStdString();
+        ifstream archivoEntrada;
+        archivoEntrada.open(name, ios::in|ios::binary);
+        if (!archivoEntrada.is_open())
+        {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Atencion");
+            msgbox->setText("No fue posible abrir archivo .dat para leer los datos");
+            msgbox->open();
+            return;
+        }
+        this->tienda->CargarDesdeStreamBinario(&archivoEntrada);
+        QString nombreTienda = QString::fromStdString(this->tienda->ConsultarNombre());
+        QString direccionInternetTienda = QString::fromStdString(this->tienda->ConsultarDireccionInternet());
+        QString direccionFisicaTienda = QString::fromStdString(this->tienda->ConsultarDireccionFisica());
+        QString telefono = QString::fromStdString(this->tienda->ConsultarTelefono());
+
+        this->ui->editNombreTienda->setText(nombreTienda);
+        this->ui->editDireccionInternetTienda->setText(direccionInternetTienda);
+        this->ui->editDireccionFisicaTienda->setText(direccionFisicaTienda);
+        this->ui->editTelefonoTienda->setText(telefono);
+
+        vector<Producto *> productosDeTienda = this->tienda->ConsultarVectorDeProductos();
+        for(Producto *producto : productosDeTienda) {
+            QString nombreEnQstring = QString::fromStdString(producto->ConsultarNombre());
+            QString idEnQString = QString::number(producto->ConsultarID());
+            QString productoEnLista = "[" + idEnQString + "]"  + " - " + nombreEnQstring;
+            this->ui->listProductosDeTienda->addItem(productoEnLista);
+            this->ui->btnCargarDesdeArchivo->setEnabled(false);
+        }
+
+    }
+}
+
 

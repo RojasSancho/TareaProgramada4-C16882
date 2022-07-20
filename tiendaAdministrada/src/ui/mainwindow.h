@@ -46,6 +46,8 @@ private slots:
 
     void on_btnGuardarEnArchivo_clicked();
 
+    void on_btnCargarDesdeArchivo_clicked();
+
 private:
     Ui::MainWindow *ui;
     Tienda *tienda = new Tienda();

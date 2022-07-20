@@ -34,7 +34,11 @@ class Tienda {
     void CambiarDireccionInternet(string nuevaDireccionInternet);
     void CambiarDireccionFisica(string nuevaDireccionFisica);
     void CambiarTelefono(string nuevoTelefono);
-
+    string ConsultarNombre();
+    string ConsultarDireccionInternet();
+    string ConsultarDireccionFisica();
+    string ConsultarTelefono();
+    vector<Producto *> ConsultarVectorDeProductos();
 
     void GuardarEnStreamBinario(ostream *streamSalida);
     void CargarDesdeStreamBinario(istream *streamEntrada);

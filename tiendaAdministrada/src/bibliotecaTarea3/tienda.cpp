@@ -81,6 +81,31 @@ void Tienda::CambiarTelefono(string nuevoTelefono)
     strcpy(this->telefono, nuevoTelefono.c_str());
 }
 
+string Tienda::ConsultarNombre()
+{
+    return this->nombre;
+}
+
+string Tienda::ConsultarDireccionInternet()
+{
+    return this->direccionInternet;
+}
+
+string Tienda::ConsultarDireccionFisica()
+{
+    return this->direccionFisica;
+}
+
+string Tienda::ConsultarTelefono()
+{
+    return this->telefono;
+}
+
+vector<Producto *> Tienda::ConsultarVectorDeProductos()
+{
+    return this->productos;
+}
+
 void Tienda::InsertarProducto(Producto *productoNuevo)
 {
     this->productos.push_back(productoNuevo);
