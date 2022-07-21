@@ -26,4 +26,4 @@ Instrucciones para compilar y ejecutar el programa:
 Debe haber una carpeta que contenga la biblioteca que se utilizó para el proyecto, que en este caso ya se encuentra en la carpeta del proyecto por defecto.
 Debe entrar al ambiente de Qt Creator y abrir el proyect desde el menu Archivo. Luego el programa se compilará y ejecutará al presionar el botón de "RUN" en la parte inferior izquierda.
 
-Se utilizó la versón 6.2.3 de Qt y la versión 7.0.2 apra desarrollar el programa.
+Se utilizó la versón 6.2.3 de Qt y la versión 7.0.2 de Qt Creator para desarrollar el programa.
