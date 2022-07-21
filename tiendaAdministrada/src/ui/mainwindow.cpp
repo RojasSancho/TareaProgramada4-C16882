@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Tienda");
 
     QMessageBox* msgbox = new QMessageBox(this);
-    msgbox->setWindowTitle("Atencion");
+    msgbox->setWindowTitle("AVISO");
     msgbox->setText("Luego de que agregue algún producto a la tienda no podrá no podrá cargar desde archivo.");
     msgbox->open();
 }
@@ -272,7 +272,7 @@ void MainWindow::on_btnGuardarEnArchivo_clicked()
     {
         QMessageBox* msgbox = new QMessageBox(this);
         msgbox->setWindowTitle("Atencion");
-        msgbox->setText("POR FAVOR VERIFIQUE LOS DATOS Y VUELVA A INTENTARLO:\n\nEl campo de Nombre no puede exceder los 15 caracteres.\nEl campo de Direccion de Internet no puede exceder los 24 caracteres.\nEl campo de Direccion Fisica no puede exceder los 24 caracteres.");
+        msgbox->setText("POR FAVOR VERIFIQUE LOS DATOS Y VUELVA A INTENTARLO:\n\nEl campo de Nombre no puede exceder los 15 caracteres.\nEl campo de Direccion de Internet no puede exceder los 24 caracteres.\nEl campo de Direccion Fisica no puede exceder los 24 caracteres.\nEl campo de Telefono no puede exceder los 8 caracteres.");
         msgbox->open();
     }
     catch(const ExcepcionDatosVacios& e)
